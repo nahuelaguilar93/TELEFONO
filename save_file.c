@@ -107,8 +107,8 @@ int get_msgs(char str[MAX_MSG],int contact)
         fprintf(stderr,"Error reading saved files from \"%s\".",filename); /*If an error occurs reports it*/
         return ERROR;
     }
-    if((fscanf(svfile,"%[^\E]s",str)==EOF)||ferror(svfile))    /*Reads all the way to the End of File and saves it into the string provided*/
-    {
+    if((fscanf(svfile,"%[^\a]s",str)==EOF)||ferror(svfile))    /*Reads all the way to the End of File and saves it into the string provided*/
+    {							      /*\a is the audible bell in the ASCII character table, nowadays it is rarely useful and it cannot be written into a message, thus the scanf reading function will read until the end of file or the non-existent audible bell ASCII, making sure it reads until the end of file*/
         fprintf(stderr,"Error reading on file \"%s\".",filename);   /*If an error occurs reports it*/
         return ERROR;
     }
